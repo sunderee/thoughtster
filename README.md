@@ -19,21 +19,21 @@ ACCESS_TOKEN=XXX
 ACCESS_TOKEN_SECRET=XXX
 ```
 
-Then, build an executable
+Since the project uses zero dependencies, just make sure you have Golang installed on your system. Create and install the executable:
 
 ```bash
-go build -o thoughtster *.go
+go install github.com/sunderee/thoughtster
 ```
 
-Congrats! Run `./thoughtster --help`
+and verify it works
 
-```
-Usage of ./thoughtster:
-  -tweet string
-        Tweet you want to post (shorter than 280 characters)
-```
+```bash
+# Print command's path
+which thoughtster
 
-and enjoy Tweeting!
+# Display help message
+thoughtster --help
+```
 
 ## License
 
