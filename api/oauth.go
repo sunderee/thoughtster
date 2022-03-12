@@ -52,7 +52,6 @@ func calculateHmacSha1(base, key string) string {
 	hmacHash.Write([]byte(base))
 
 	return base64.StdEncoding.EncodeToString(hmacHash.Sum(nil))
-
 }
 
 func generateNonce() string {
