@@ -3,7 +3,7 @@
 Tweeting is hard; you have to open a new browser tab, type `twitter.com`, navigate to _What's happening_, type out your message, and send it. Instead, wouldn't it be easier if you could just...
 
 ```bash
-./thoughtster --tweet "...do it from a command line"
+thoughtster --tweet "...do it from a command line"
 ```
 
 And that's basically what this project is all about.
