@@ -26,7 +26,7 @@ func (oauth1Model *Oauth1Model) BuildOauth1AuthenticationHeader(method, path str
 	var parameterString string = strings.Replace(urlValues.Encode(), "+", "%20", -1)
 	var oauth1Signature string = produceOauth1Signature(method, path, parameterString, oauth1Model)
 
-	return "Oauth " +
+	return "OAuth " +
 		"oauth_signature_method=\"" + url.QueryEscape(urlValues.Get("oauth_signature_method")) + "\"," +
 		"oauth_version=\"" + url.QueryEscape(urlValues.Get("oauth_version")) + "\"," +
 		"oauth_nonce=\"" + url.QueryEscape(urlValues.Get("oauth_nonce")) + "\"," +
@@ -39,6 +39,7 @@ func (oauth1Model *Oauth1Model) BuildOauth1AuthenticationHeader(method, path str
 func produceOauth1Signature(method, fullPath, paramtersString string, oauth1Model *Oauth1Model) string {
 	method = strings.ToUpper(method)
 	fullPath = url.QueryEscape(strings.Split(fullPath, "?")[0])
+	paramtersString = url.QueryEscape(paramtersString)
 
 	var signatureBase string = fmt.Sprintf("%s&%s&%s", method, fullPath, paramtersString)
 	var signingKey string = fmt.Sprintf("%s&%s", oauth1Model.ConsumerSecret, oauth1Model.TokenSecret)
@@ -60,7 +61,7 @@ func generateNonce() string {
 		"0123456789"
 	var seed *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
-	var byteBuffer []byte = make([]byte, 48)
+	var byteBuffer []byte = make([]byte, 12)
 	for i := range byteBuffer {
 		byteBuffer[i] = charset[seed.Intn(len(charset))]
 	}

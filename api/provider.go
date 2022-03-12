@@ -9,8 +9,6 @@ import (
 )
 
 func PostTweet(text, oauth1HeaderContents string) (*PostTweetResponseModel, error) {
-	var httpClient *http.Client = &http.Client{}
-
 	const postTweetsURL string = "https://api.twitter.com/2/tweets"
 
 	var body *PostTweetRequestModel = &PostTweetRequestModel{TweetText: text}
@@ -32,6 +30,7 @@ func PostTweet(text, oauth1HeaderContents string) (*PostTweetResponseModel, erro
 	request.Header.Add("Authorization", oauth1HeaderContents)
 	request.Header.Add("Content-Type", "application/json")
 
+	var httpClient *http.Client = &http.Client{}
 	response, responseError := httpClient.Do(request)
 	if responseError != nil {
 		return nil, &ApiException{
@@ -41,7 +40,7 @@ func PostTweet(text, oauth1HeaderContents string) (*PostTweetResponseModel, erro
 	}
 	defer response.Body.Close()
 
-	if response.StatusCode != 200 {
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return nil, &ApiException{
 			StatusCode: response.StatusCode,
 			Message:    response.Status,
