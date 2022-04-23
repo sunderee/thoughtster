@@ -3,7 +3,7 @@
 Tweeting is hard; you have to open a new browser tab, type `twitter.com`, navigate to _What's happening_, type out your message, and send it. Instead, wouldn't it be easier if you could just...
 
 ```bash
-thoughtster --tweet "...do it from a command line"
+thoughtster -tweet "...do it from a command line"
 ```
 
 And that's basically what this project is all about.
@@ -19,20 +19,20 @@ ACCESS_TOKEN=XXX
 ACCESS_TOKEN_SECRET=XXX
 ```
 
-Since the project uses zero dependencies, just make sure you have Golang installed on your system. Create and install the executable:
+Build the project
 
 ```bash
-go install github.com/sunderee/thoughtster
+go build -o thoughtster *.go
 ```
 
-and verify it works
+And now you can use the executable!
 
 ```bash
-# Print command's path
-which thoughtster
-
 # Display help message
-thoughtster --help
+./thoughtster -help
+
+# Tweet
+./thoughtster -tweet "Something you wanna tell to the world!"
 ```
 
 ## License
